@@ -1,0 +1,40 @@
+name: Build and Release Chunker
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    permissions: write-all
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v2
+
+      - name: Build Chunker
+        run: make
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v1.0.0 # Update with the desired release tag name
+          release_name: Release v1.0.0 # Update with the desired release name
+          body: |
+            This is the first release of Chunker.
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Artifact
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./chunker # Update with the path to your binary
+          asset_name: chunker # Update with the desired name of the binary artifact
+          asset_content_type: application/octet-stream
