@@ -45,7 +45,7 @@ int main(int argc, char *argv[]) {
     char fp[FINGERPRINT_LENGTH];
     while ((bytes_read = fread(buffer, 1, chunk_size, stdin)) > 0) {
         fingerprint(buffer, fp);
-        printf("%016llx,%zu\n", *((uint64_t *)fp), bytes_read);
+        printf("%016lx,%zu\n", *((uint64_t *)fp), bytes_read);
     }
 
     free(buffer);
