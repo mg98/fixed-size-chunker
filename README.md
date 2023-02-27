@@ -1,8 +1,9 @@
 # Fixed Size Chunker (FSC)
 
-Efficiency-first implementation of the FSC algorithm.
+Efficiency-first implementation of the FSC algorithm for scientific analyses.
 This program will take the target chunk size and a byte stream as arguments
 and output for each next chunk an 8-byte fingerprint (using a fast non-cryptographic function) and the chunk's size in CSV format.
+This program was done for performance measurements on the algorithm itself and will never actually write anything to disk.
 
 ## Usage
 
