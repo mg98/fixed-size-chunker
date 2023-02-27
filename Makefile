@@ -1,5 +1,5 @@
 chunker: chunker.c
-	gcc $< -o $@
+	gcc -O2 $< -o $@
 
 clean:
 	rm -f chunker
